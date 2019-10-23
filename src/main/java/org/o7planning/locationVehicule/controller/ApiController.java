@@ -16,4 +16,13 @@ public class ApiController {
         return restTemplate.getForObject("http://localhost:8081/vehiculeList", Vehicule[].class);
     }
 
+    public Vehicule getVehiculeById(int id){
+        return restTemplate.getForObject("http://localhost:8081/vehicule/"+id, Vehicule.class);
+    }
+
+    public Vehicule postVehicule(Vehicule vehicule){
+        return restTemplate.postForObject("http://localhost:8081/addNew", vehicule, Vehicule.class);
+    }
+
+    
 }

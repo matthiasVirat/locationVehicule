@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,34 +46,37 @@ public class MainController {
         model.addAttribute("vehicules", apiController.getVehicules());
         return "vehiculeList";
     }
-//    @RequestMapping(value = {"/vehicule/{id}"}, method = RequestMethod.GET)
-//    public Vehicule vehiculeById(Model model, @PathVariable int id) {
-//        ApiController apiController = new ApiController();
-//        return
-//    }
+    @RequestMapping(value = {"/vehicule/{id}"}, method = RequestMethod.GET)
+    public String vehiculeById(Model model, @PathVariable int id) {
+        ApiController apiController = new ApiController();
+        model.addAttribute("vehicule", apiController.getVehiculeById(id));
+        return "vehicule";
+    }
 
     // Injection du contenu du formulaire d'ajout de véhicule dans addVehicule.html
-//    @RequestMapping(value = {"/addVehicule"}, method = RequestMethod.GET)
-//    public String showAddVehiculeForm(Model model){
-//        VehiculeForm vehiculeForm = new VehiculeForm();
-//        model.addAttribute("vehiculeForm", vehiculeForm);
-//        return "addVehicule";
-//    }
+    @RequestMapping(value = {"/addVehicule"}, method = RequestMethod.GET)
+    public String showAddVehiculeForm(Model model){
+        VehiculeForm vehiculeForm = new VehiculeForm();
+        model.addAttribute("vehiculeForm", vehiculeForm);
+        return "addVehicule";
+    }
 
     // Injection des données issues du formulaire dans la liste de véhicules
-//    @RequestMapping(value = {"/addVehicule"}, method = RequestMethod.POST)
-//    public String saveVehicule(Model model, @ModelAttribute("vehiculeForm") VehiculeForm vehiculeForm){
-//        int id        = vehiculeForm.getId();
-//        String marque = vehiculeForm.getMarque();
-//        String modele = vehiculeForm.getModele();
-//
-//        if (id != 0 && marque != null && marque.length() > 0 && model != null && modele.length() > 0){
-//            Vehicule vehicule = new Vehicule(id, marque, modele);
-//            vehicules.add(vehicule);
-//            return "redirect:/vehiculeList";
-//        } else {
-//            model.addAttribute("errorMessage", errorMessage);
-//            return "addVehicule";
-//        }
-//    }
+    @RequestMapping(value = {"/addVehicule"}, method = RequestMethod.POST)
+    public String saveVehicule(Model model, @ModelAttribute("vehiculeForm") VehiculeForm vehiculeForm){
+        int id        = vehiculeForm.getId();
+        String marque = vehiculeForm.getMarque();
+        String modele = vehiculeForm.getModele();
+
+        if (id != 0 && marque != null && marque.length() > 0 && model != null && modele.length() > 0){
+            Vehicule vehicule = new Vehicule(id, marque, modele);
+            // ajouter la méthode de post de l'API
+            ApiController apiController = new ApiController();
+            apiController.postVehicule(vehicule);
+            return "redirect:/vehiculeList";
+        } else {
+            model.addAttribute("errorMessage", errorMessage);
+            return "addVehicule";
+        }
+    }
 }
