@@ -6,6 +6,8 @@ public class Vehicule {
     private String marque;
     private String modele;
 
+    public Vehicule() {}
+
     public Vehicule(int id, String marque, String modele) {
         this.id = id;
         this.marque = marque;

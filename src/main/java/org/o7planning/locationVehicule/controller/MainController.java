@@ -1,25 +1,27 @@
 package org.o7planning.locationVehicule.controller;
 
+import org.o7planning.locationVehicule.form.VehiculeForm;
 import org.o7planning.locationVehicule.model.Vehicule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class MainController {
+    //    private List getVehicules() {
+//        RestTemplate restTemplate = new RestTemplate();
+//        return restTemplate.getForObject("http://localhost:8081/vehiculeList", List.class);
+//    }
 
-    private static List<Vehicule> vehicules = new ArrayList<Vehicule>();
 
-    static {
-        vehicules.add(new Vehicule(1, "Audi", "A7"));
-        vehicules.add(new Vehicule(2, "Peugeot", "308"));
-        vehicules.add(new Vehicule(3, "Citroën", "C3"));
-    }
 
     // Injectez (inject) via application.properties.
     @Value("${welcome.message}")
@@ -39,9 +41,15 @@ public class MainController {
     // Injection de la liste des véhicules dans vehiculeList.html
     @RequestMapping(value = {"/vehiculeList"}, method = RequestMethod.GET)
     public String vehiculeList(Model model){
-        model.addAttribute("vehicules", vehicules);
+        ApiController apiController = new ApiController();
+        model.addAttribute("vehicules", apiController.getVehicules());
         return "vehiculeList";
     }
+//    @RequestMapping(value = {"/vehicule/{id}"}, method = RequestMethod.GET)
+//    public Vehicule vehiculeById(Model model, @PathVariable int id) {
+//        ApiController apiController = new ApiController();
+//        return
+//    }
 
     // Injection du contenu du formulaire d'ajout de véhicule dans addVehicule.html
 //    @RequestMapping(value = {"/addVehicule"}, method = RequestMethod.GET)
