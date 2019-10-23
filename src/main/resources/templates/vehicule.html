@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <title>un véhicule</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
 </head>
 <body>
     <h1 th:utext="${vehicule.marque +' '+ vehicule.modele}">...</h1>
     <a href="addVehicule">Ajouter un véhicule</a>
     <br/><br/>
     <div>
-        <table border="1">
+        <table class="table table-bordered">
             <tr>
-                <th>ID</th>
-                <th>Marque</th>
-                <th>Modèle</th>
+                <th scope="col">ID</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Modèle</th>
             </tr>
             <tr>
                 <td th:utext="${vehicule.id}">...</td>
