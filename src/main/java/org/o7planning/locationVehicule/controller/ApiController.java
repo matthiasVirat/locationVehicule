@@ -11,6 +11,7 @@ import java.util.List;
 
 public class ApiController {
 
+    @Autowired
     private RestTemplate restTemplate = new RestTemplate();
 
     public List<Vehicule> getVehicules() {

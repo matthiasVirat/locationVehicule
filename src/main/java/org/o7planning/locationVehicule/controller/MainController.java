@@ -64,13 +64,12 @@ public class MainController {
     // Injection des données issues du formulaire dans la liste de véhicules
     @RequestMapping(value = {"/addVehicule"}, method = RequestMethod.POST)
     public String saveVehicule(Model model, @ModelAttribute("vehiculeForm") VehiculeForm vehiculeForm){
-        int id        = vehiculeForm.getId();
+        String id_string        = vehiculeForm.getId();
         String marque = vehiculeForm.getMarque();
         String modele = vehiculeForm.getModele();
-
-        if (id != 0 && marque != null && marque.length() > 0 && model != null && modele.length() > 0){
+        int id = Integer.parseInt(id_string);
+        if (vehiculeForm.validate()){
             Vehicule vehicule = new Vehicule(id, marque, modele);
-            // ajouter la méthode de post de l'API
             ApiController apiController = new ApiController();
             apiController.postVehicule(vehicule);
             return "redirect:/vehiculeList";

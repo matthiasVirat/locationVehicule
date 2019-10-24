@@ -2,15 +2,15 @@ package org.o7planning.locationVehicule.form;
 
 public class VehiculeForm {
 
-    private int id;
+    private String id;
     private String marque;
     private String modele;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -28,5 +28,9 @@ public class VehiculeForm {
 
     public void setModele(String modele) {
         this.modele = modele;
+    }
+
+    public Boolean validate(){
+        return (Integer.parseInt(id) != 0 && marque != null && marque.length() > 0 && modele != null && modele.length() > 0);
     }
 }
