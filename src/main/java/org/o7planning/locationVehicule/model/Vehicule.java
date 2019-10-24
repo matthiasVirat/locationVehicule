@@ -46,4 +46,8 @@ public class Vehicule {
                 ", modele='" + modele + '\'' +
                 '}';
     }
+
+    public Boolean validate(){
+        return (marque != null && marque.length() > 0 && modele != null && modele.length() > 0);
+    }
 }

@@ -73,4 +73,23 @@ public class MainController {
         apiController.deleteVehicule(id);
         return "redirect:/vehiculeList";
     }
+
+    @RequestMapping(value = {"/updateVehicule/{id}"}, method = RequestMethod.GET)
+    public String showUpdateVehiculeForm(Model model, @PathVariable int id){
+        ApiController apiController = new ApiController();
+        model.addAttribute("vehicule", apiController.getVehiculeById(id));
+        return "updateVehicule";
+    }
+
+    @RequestMapping(value = {"/updateVehicule"}, method = RequestMethod.POST)
+    public String updateVehicule(Model model, @ModelAttribute("Vehicule") Vehicule vehicule) {
+        if (vehicule.validate()) {
+            ApiController apiController = new ApiController();
+            apiController.updateVehicule(vehicule);
+            return "redirect:/vehiculeList";
+        } else {
+            model.addAttribute("errorMessage", errorMessage);
+            return "updateVehicule";
+        }
+    }
 }

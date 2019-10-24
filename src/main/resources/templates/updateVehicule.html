@@ -2,24 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Ajout d'un véhicule</title>
+    <title>Modification d'un véhicule</title>
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
 </head>
 <body>
-<h1>Ajout d'un véhicule :</h1>
+<h1 th:utext="'Modification du véhicule' +${vehicule.marque +' '+ vehicule.modele}">...</h1>
 
-<!--
-   In Thymeleaf the equivalent of
-   JSP's ${pageContext.request.contextPath}/edit.html
-   would be @{/edit.html}
-   -->
+<form class="pl-5 pr-5" th:action="@{/updateVehicule}"
+      th:object="${vehicule}" method="POST">
 
-<form class="pl-5 pr-5" th:action="@{/addVehicule}"
-      th:object="${vehiculeForm}" method="POST">
+    <div class="form-group">
+        <label for="id">id : </label>
+        <input id="id" class="form-control" type="text" readonly="true" th:field="*{id}" />
+        <br/>
+    </div>
     <div class="form-group">
         <label for="marque">Marque : </label>
-        <input id="marque" class="form-control" type="text" th:field="*{marque}" />
+        <input id="marque" class="form-control" type="text" th:field="*{marque}"  />
         <br/>
     </div>
     <div class="form-group">
@@ -27,18 +27,13 @@
         <input id="modele" class="form-control" type="text" th:field="*{modele}" />
         <br/>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-<!--    <input type="submit" value="Create" />-->
+    <button type="submit" class="btn btn-primary">MODIFIER</button>
+    <!--    <input type="submit" value="Create" />-->
 </form>
-
-<br/>
-
-<!-- Check if errorMessage is not null and not empty -->
 
 <div th:if="${errorMessage}" th:utext="${errorMessage}"
      style="color:red;font-style:italic;">
     ...
 </div>
-
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Liste des véhicules</h1>
-    <a href="addVehicule">Ajouter un véhicule</a>
+    <button type="button" class="btn btn-primary"><a class="text-reset" href="addVehicule">Ajouter un véhicule</a></button>
     <br/><br/>
     <div class="p-5">
         <table class="table table-bordered">
@@ -16,6 +16,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Marque</th>
                 <th scope="col">Modèle</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             <tr th:each ="vehicule : ${vehicules}">
@@ -47,6 +48,11 @@
                             </div>
                         </div>
                     </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary">
+                        <a class="text-reset" th:href="'http://localhost:8082/updateVehicule/'+${vehicule.id}">MODIFIER</a>
+                    </button>
                 </td>
             </tr>
         </table>

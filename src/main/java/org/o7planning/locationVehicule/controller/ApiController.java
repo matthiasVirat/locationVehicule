@@ -32,5 +32,9 @@ public class ApiController {
     public void deleteVehicule(int id) {
         restTemplate.delete("http://localhost:8081/deleteVehicule/"+id);
     }
+
+    public void updateVehicule(Vehicule vehicule) {
+        restTemplate.put("http://localhost:8081/updateVehicule", vehicule);
+    }
     
 }
