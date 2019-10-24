@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,5 +78,12 @@ public class MainController {
             model.addAttribute("errorMessage", errorMessage);
             return "addVehicule";
         }
+    }
+
+    @RequestMapping(value = {"/delete/{id}"}, method = RequestMethod.GET)
+    public String deleteVehiculeById(@PathVariable int id){
+        ApiController apiController = new ApiController();
+        apiController.deleteVehicule(id);
+        return "redirect:/vehiculeList";
     }
 }

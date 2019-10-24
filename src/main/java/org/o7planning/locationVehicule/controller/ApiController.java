@@ -29,5 +29,8 @@ public class ApiController {
         return restTemplate.postForObject("http://localhost:8081/addNew", vehicule, Vehicule.class);
     }
 
+    public void deleteVehicule(int id) {
+        restTemplate.delete("http://localhost:8081/deleteVehicule/"+id);
+    }
     
 }
