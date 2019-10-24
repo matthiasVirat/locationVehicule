@@ -17,11 +17,11 @@
 
 <form class="pl-5 pr-5" th:action="@{/addVehicule}"
       th:object="${vehiculeForm}" method="POST">
-    <div class="form-group">
-        <label for="ID">ID : </label>
-        <input id="ID" class="form-control" type="number" th:field="*{id}" />
-        <br/>
-    </div>
+<!--    <div class="form-group">-->
+<!--        <label for="ID">ID : </label>-->
+<!--        <input id="ID" class="form-control" type="number" th:field="*{id}" />-->
+<!--        <br/>-->
+<!--    </div>-->
     <div class="form-group">
         <label for="marque">Marque : </label>
         <input id="marque" class="form-control" type="text" th:field="*{marque}" />

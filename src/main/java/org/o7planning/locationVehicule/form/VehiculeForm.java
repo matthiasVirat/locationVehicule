@@ -31,6 +31,6 @@ public class VehiculeForm {
     }
 
     public Boolean validate(){
-        return (Integer.parseInt(id) != 0 && marque != null && marque.length() > 0 && modele != null && modele.length() > 0);
+        return (marque != null && marque.length() > 0 && modele != null && modele.length() > 0);
     }
 }

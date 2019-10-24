@@ -2,7 +2,6 @@ package org.o7planning.locationVehicule.controller;
 
 import org.o7planning.locationVehicule.form.VehiculeForm;
 import org.o7planning.locationVehicule.model.Vehicule;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,20 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestTemplate;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class MainController {
-    //    private List getVehicules() {
-//        RestTemplate restTemplate = new RestTemplate();
-//        return restTemplate.getForObject("http://localhost:8081/vehiculeList", List.class);
-//    }
-
-
 
     // Injectez (inject) via application.properties.
     @Value("${welcome.message}")
@@ -65,12 +54,10 @@ public class MainController {
     // Injection des données issues du formulaire dans la liste de véhicules
     @RequestMapping(value = {"/addVehicule"}, method = RequestMethod.POST)
     public String saveVehicule(Model model, @ModelAttribute("vehiculeForm") VehiculeForm vehiculeForm){
-        String id_string        = vehiculeForm.getId();
-        String marque = vehiculeForm.getMarque();
-        String modele = vehiculeForm.getModele();
-        int id = Integer.parseInt(id_string);
         if (vehiculeForm.validate()){
-            Vehicule vehicule = new Vehicule(id, marque, modele);
+            Vehicule vehicule = new Vehicule();
+            vehicule.setMarque(vehiculeForm.getMarque());
+            vehicule.setModele(vehiculeForm.getModele());
             ApiController apiController = new ApiController();
             apiController.postVehicule(vehicule);
             return "redirect:/vehiculeList";
