@@ -7,9 +7,12 @@
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
 </head>
 <body>
-    <h1>Liste des véhicules</h1>
-    <button type="button" class="btn btn-primary"><a class="text-reset" href="addVehicule">Ajouter un véhicule</a></button>
-    <br/><br/>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-5">Liste des véhicules</h1>
+    </div>
+</div>
+
     <div class="p-5">
         <table class="table table-bordered">
             <tr>
@@ -40,13 +43,28 @@
                         <img th:src="@{/icon/svg/caret-bottom.svg}" alt="icon classement ascendant">
                     </a>
                 </th>
+                <th scope="col">Detail</th>
                 <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-light">
+                            <a class="text-reset" href="addVehicule">Ajouter un véhicule</a>
+                        </button>
+                    </div>
+                </th>
             </tr>
             <tr th:each ="vehicule : ${vehicules}">
                 <td th:utext="${vehicule.id}">...</td>
                 <td th:utext="${vehicule.marque}">...</td>
                 <td th:utext="${vehicule.modele}">...</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a th:href="'http://localhost:8082/vehicule/'+${vehicule.id}">
+                            <img th:src="@{/icon/svg/magnifying-glass.svg}" alt="icon visualiser détail">
+                        </a>
+                    </div>
+
+                </td>
                 <td>
                     <div class="d-flex justify-content-center">
                         <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#deleteModal'+${vehicule.id}">

@@ -7,7 +7,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
 </head>
 <body>
-<h1 th:utext="'Modification du véhicule' +${vehicule.marque +' '+ vehicule.modele}">...</h1>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-5" th:utext="'Modification du véhicule' +${vehicule.marque +' '+ vehicule.modele}">...</h1>
+    </div>
+</div>
 
 <form class="pl-5 pr-5" th:action="@{/updateVehicule}"
       th:object="${vehicule}" method="POST">

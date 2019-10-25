@@ -7,9 +7,14 @@
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.css}"/>
 </head>
 <body>
-    <h1 th:utext="${vehicule.marque +' '+ vehicule.modele}">...</h1>
-    <a href="addVehicule">Ajouter un véhicule</a>
-    <br/><br/>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-5" th:utext="${vehicule.marque +' '+ vehicule.modele}">...</h1>
+    </div>
+</div>
+
+    <button type="button" class="btn btn-light"><a href="addVehicule">Ajouter un véhicule</a></button>
+<br/><br/>
     <div>
         <table class="table table-bordered">
             <tr>
