@@ -21,6 +21,11 @@ public class ApiController {
         return new ArrayList<>(Arrays.asList(vehicules));
     }
 
+    public List<Vehicule> getVehiculesOrdered(String critere, String ordre) {
+        Vehicule[] vehicules = restTemplate.getForObject("http://localhost:8081/vehiculeList/"+critere+"/"+ordre, Vehicule[].class);
+        return new ArrayList<>(Arrays.asList(vehicules));
+    }
+
     public Vehicule getVehiculeById(int id){
         return restTemplate.getForObject("http://localhost:8081/vehicule/"+id, Vehicule.class);
     }
@@ -36,5 +41,5 @@ public class ApiController {
     public void updateVehicule(Vehicule vehicule) {
         restTemplate.put("http://localhost:8081/updateVehicule", vehicule);
     }
-    
+
 }

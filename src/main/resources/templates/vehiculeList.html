@@ -13,9 +13,33 @@
     <div class="p-5">
         <table class="table table-bordered">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Marque</th>
-                <th scope="col">Modèle</th>
+                <th scope="col">
+                    ID
+                    <a href="http://localhost:8082/vehiculeList/id/asc">
+                        <img th:src="@{/icon/svg/caret-top.svg}" alt="icon classement ascendant">
+                    </a>
+                    <a href="http://localhost:8082/vehiculeList/id/desc">
+                        <img th:src="@{/icon/svg/caret-bottom.svg}" alt="icon classement ascendant">
+                    </a>
+                </th>
+                <th scope="col">
+                    Marque
+                    <a href="http://localhost:8082/vehiculeList/marque/asc">
+                        <img th:src="@{/icon/svg/caret-top.svg}" alt="icon classement ascendant">
+                    </a>
+                    <a href="http://localhost:8082/vehiculeList/marque/desc">
+                        <img th:src="@{/icon/svg/caret-bottom.svg}" alt="icon classement ascendant">
+                    </a>
+                </th>
+                <th scope="col">
+                    Modèle
+                    <a href="http://localhost:8082/vehiculeList/modele/asc">
+                        <img th:src="@{/icon/svg/caret-top.svg}" alt="icon classement ascendant">
+                    </a>
+                    <a href="http://localhost:8082/vehiculeList/modele/desc">
+                        <img th:src="@{/icon/svg/caret-bottom.svg}" alt="icon classement ascendant">
+                    </a>
+                </th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -24,10 +48,11 @@
                 <td th:utext="${vehicule.marque}">...</td>
                 <td th:utext="${vehicule.modele}">...</td>
                 <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#deleteModal'+${vehicule.id}">
-                        SUPPRIMER
-                    </button>
-
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#deleteModal'+${vehicule.id}">
+                            SUPPRIMER
+                        </button>
+                    </div>
                     <!-- Modal -->
                     <div class="modal fade" th:id="'deleteModal'+${vehicule.id}" tabindex="-1" role="dialog" th:aria-labelledby="'deleteModalLabel'+${vehicule.id}" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -50,9 +75,11 @@
                     </div>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary">
-                        <a class="text-reset" th:href="'http://localhost:8082/updateVehicule/'+${vehicule.id}">MODIFIER</a>
-                    </button>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-primary">
+                            <a class="text-reset" th:href="'http://localhost:8082/updateVehicule/'+${vehicule.id}">MODIFIER</a>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </table>

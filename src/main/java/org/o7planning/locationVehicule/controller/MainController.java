@@ -36,6 +36,16 @@ public class MainController {
         model.addAttribute("vehicules", apiController.getVehicules());
         return "vehiculeList";
     }
+
+    @RequestMapping(value = {"/vehiculeList/{critere}/{ordre}"}, method = RequestMethod.GET)
+    public String vehiculeList(Model model, @PathVariable String critere, @PathVariable String ordre){
+        ApiController apiController = new ApiController();
+        model.addAttribute("vehicules", apiController.getVehiculesOrdered(critere, ordre));
+        return "vehiculeList";
+    }
+
+
+
     @RequestMapping(value = {"/vehicule/{id}"}, method = RequestMethod.GET)
     public String vehiculeById(Model model, @PathVariable int id) {
         ApiController apiController = new ApiController();
